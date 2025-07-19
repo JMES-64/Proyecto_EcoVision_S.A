@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
 
 /**
  * Define la interfaz Producto que describe la estructura de un producto
@@ -32,70 +32,56 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
       nombre: 'Producto Ecológico 1',
       precio: 100,
       descripcion: 'Descripción del Producto Ecológico 1 con ingredientes naturales',
-      imagen: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://www.ilser.net/wp-content/uploads/2024/12/productos-limpieza-ecologicos.jpg'
     },
     {
       id: 2,
       nombre: 'Producto Ecológico 2',
       precio: 200,
       descripcion: 'Descripción del Producto Ecológico 2 con certificación orgánica',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://alimonhoreca.com/wp-content/uploads/2022/06/Productos_desechables_ecologicos_biodegradables_sostenible_alimon_horeca.jpg'
     },
     {
       id: 3,
       nombre: 'Producto Ecológico 3',
       precio: 300,
       descripcion: 'Descripción del Producto Ecológico 3 sostenible y natural',
-      imagen: 'https://images.unsplash.com/photo-1556909114-8ba03863d4bb?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://verdeaurora.com/wp-content/uploads/2023/05/beneficios-productos-ecologicos-m.png'
     },
     {
       id: 4,
       nombre: 'Producto Ecológico 4',
       precio: 400,
       descripcion: 'Descripción del Producto Ecológico 4 libre de químicos',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://imagenes.elpais.com/resizer/v2/EGHBH7I3OBWZYELMRCE3R467M4.jpg?auth=b38df221335d3e11a8d9bb4ec54fe3578cddafc467ddc61b611a56777ae86967&width=1960&height=1470&smart=true'
     },
     {
       id: 5,
       nombre: 'Producto Ecológico 5',
       precio: 500,
       descripcion: 'Descripción del Producto Ecológico 5 biodegradable',
-      imagen: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://www.greentecher.com/wp-content/uploads/2023/03/marco-productos-ecologicos-_1_.webp'
     },
     {
       id: 6,
       nombre: 'Producto Ecológico 6',
       precio: 600,
       descripcion: 'Descripción del Producto Ecológico 6 con empaques reciclables',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzR6AtF9uhlwfSrn494BtPSVueqhv_vhYg9w&s'
     },
     {
       id: 7,
       nombre: 'Producto Ecológico 7',
       precio: 700,
       descripcion: 'Descripción del Producto Ecológico 7 de comercio justo',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2PkHqEvCP8phS3pR1_FoUZ1qAXrYquxrrg&s'
     },
     {
       id: 8,
       nombre: 'Producto Ecológico 8',
       precio: 800,
       descripcion: 'Descripción del Producto Ecológico 8 con certificación verde',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
-    },
-       {
-      id: 9,
-      nombre: 'Producto Ecológico 9',
-      precio: 900,
-      descripcion: 'Descripción del Producto Ecológico 8 con certificación verde',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
-    },
-       {
-      id: 10,
-      nombre: 'Producto Ecológico 10',
-      precio: 1000,
-      descripcion: 'Descripción del Producto Ecológico 8 con certificación verde',
-      imagen: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop&crop=center'
+      imagen: 'https://images.unsplash.com/photo-1586882829491-b81178aa622e?w=400&h=300&fit=crop&crop=center'
     }
   ];
 
@@ -132,6 +118,11 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.imagenCargada.size < this.productos.length) {
       this.configurarLazyLoading();
     }
+
+    // Aplicar la transformación inicial
+    setTimeout(() => {
+      this.actualizarYTransformar();
+    }, 0);
   }
 
   ngOnDestroy(): void {
@@ -140,6 +131,8 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.observadorIntersection.disconnect();
     }
   }
+
+
 
   /**
    * Configura el lazy loading de imágenes
@@ -168,9 +161,7 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
           const productoId = parseInt(imagen.getAttribute('data-product-id') || '0');
           
           if (productoId && !this.imagenCargada.has(productoId)) {
-            // Cargar imagen inmediatamente cuando entra en vista
             this.imagenCargada.add(productoId);
-            // Dejar de observar esta imagen
             this.observadorIntersection.unobserve(imagen);
           }
         }
@@ -223,7 +214,6 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
     const imagen = event.target as HTMLImageElement;
     imagen.style.opacity = '1';
     
-    // Asegurar que el producto esté marcado como cargado
     if (!this.imagenCargada.has(productoId)) {
       this.imagenCargada.add(productoId);
     }
@@ -234,7 +224,7 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   imagenError(event: Event): void {
     const imagen = event.target as HTMLImageElement;
-    imagen.src = 'https://media.istockphoto.com/id/1147544807/es/vector/no-imagen-en-miniatura-gr%C3%A1fico-vectorial.jpg?s=612x612&w=0&k=20&c=Bb7KlSXJXh3oSDlyFjIaCiB9llfXsgS7mHFZs6qUgVk=';
+    imagen.src = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
     imagen.style.opacity = '1';
   }
 
@@ -254,6 +244,7 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navegar a la derecha en la lista de productos
    */
   moverDerecha(): void {
+    console.log('Antes - índice:', this.indiceActual, 'puede ir derecha:', this.puedeIrDerecha);
     if (this.puedeIrDerecha) {
       this.indiceActual = Math.min(
         this.productos.length - this.itemsEnVista, 
@@ -263,6 +254,7 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.actualizarBotonesNavegacion();
       this.actualizarPuntoActual();
     }
+    console.log('Después - índice:', this.indiceActual);
   }
 
   /**
@@ -308,6 +300,4 @@ export class ProductosComponent implements OnInit, AfterViewInit, OnDestroy {
   private actualizarPuntoActual(): void {
     this.puntoIndiceActual = Math.floor(this.indiceActual / this.itemsEnVista);
   }
-
-  
 }
