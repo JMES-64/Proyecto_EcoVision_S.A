@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { producerNotifyConsumers } from '@angular/core/primitives/signals';
 import { RouterOutlet } from '@angular/router';
-import { Productos } from './productos/productos';
+import {ProductosComponent } from './productos/productos';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Productos],
+  imports: [RouterOutlet, ProductosComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

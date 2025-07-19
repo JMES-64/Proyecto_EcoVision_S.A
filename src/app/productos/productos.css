@@ -1,5 +1,5 @@
-/*Contenedor del menú de productos*/
-.MenúProductos {
+/* Contenedor del menú de productos */
+.MenuProductos {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -7,33 +7,33 @@
   font-family: 'Arial', sans-serif;
 }
 
-/*Encabezado del menú de productos*/
-.EncabezadoMenú{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20%;
+/* Encabezado del menú de productos */
+.EncabezadoMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.EncabezadoMenú h2 {
+.EncabezadoMenu h2 {
   margin: 0;
   color: #51b32b;
   font-size: 24px;
   font-weight: 600;
 }
 
-/*Diseño de los controles*/
-.ControlesMenu{
-    display: flex;
-    gap: 10px;
+/* Diseño de los controles */
+.ControlesMenu {
+  display: flex;
+  gap: 10px;
 }
 
-.IrALa{
+.IrALa {
   width: 40px;
   height: 40px;
   border: none;
   background: #926a2e;
-  color: rgb(10, 189, 25);
+  color: white;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -42,34 +42,361 @@
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 .IrALa:hover:not(.disabled) {
   background: #51b32b;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(218, 134, 9, 0.15);
+  box-shadow: 0 4px 8px rgba(81, 179, 43, 0.25);
 }
 
-.IrALa:focus{
-outline: 2px solid #a1821c;
-outline-offset: 2px;
+.IrALa:focus {
+  outline: 2px solid #51b32b;
+  outline-offset: 2px;
 }
 
-.IrALa.disabled{
-    background: #926a2e;
-    cursor : not-allowed;
-    transform: none;
-    box-shadow: none;
+.IrALa.disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-.IrALa.Izquierda {
-    border-width: 6px 10px 6px 0;
-    border-color: transparent rgb(202, 123, 33) transparent transparent ;
+.FlechaIzquierda, .FlechaDerecha {
+  width: 0;
+  height: 0;
+  border-style: solid;
 }
 
-.IrALa.Derecha{
-    border-width: 6px 0 6px 10px;
-    border-color: transparent  transparent transparent rgb(202, 123, 33);
+.FlechaIzquierda {
+  border-width: 6px 10px 6px 0;
+  border-color: transparent white transparent transparent;
 }
 
+.FlechaDerecha {
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent white;
+}
 
+/* Contenedor del menú y los items */
+.ContenedorProductos {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: #f8f9fa;
+}
 
+.ItemsProductos {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  gap: 30px;
+  padding: 20px;
+}
+
+.ItemProducto {
+  flex: 0 0 280px;
+  min-width: 280px;
+}
+
+/* Tarjeta del producto */
+.TarjetaProducto {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.TarjetaProducto:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Contenedor de la imagen y lazy loading */
+.ImagenProductoContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.ImagenProducto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  border-radius: 0;
+}
+
+.ImagenProducto:hover {
+  transform: scale(1.05);
+}
+
+.IndicadorCarga {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  z-index: 1;
+}
+
+.Cargando {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e9ecef;
+  border-top: 4px solid #51b32b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animación de giro */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Información del producto */
+.InformacionProducto {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.InformacionProducto h3 {
+  margin: 0 0 12px 0;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.Descripcion {
+  color: #6c757d;
+  font-size: 14px;
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.Precio {
+  font-size: 22px;
+  font-weight: bold;
+  color: #51b32b;
+  margin-bottom: 0;
+}
+
+/* Indicador de movimiento */
+.IndicadorDesplazamiento {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.PuntosIndicadores {
+  display: flex;
+  gap: 10px;
+}
+
+.Punto {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #dee2e6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  position: relative;
+}
+
+.Punto:hover {
+  background: #51b32b;
+  transform: scale(1.2);
+}
+
+.Punto.Activo {
+  background: #51b32b;
+  transform: scale(1.3);
+}
+
+.Punto:focus {
+  outline: 2px solid #51b32b;
+  outline-offset: 3px;
+}
+
+/* Efectos de entrada para los productos */
+.ItemProducto {
+  opacity: 1;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Diseño responsivo */
+@media (max-width: 1024px) {
+  .ItemProducto {
+    flex: 0 0 260px;
+    min-width: 260px;
+  }
+  
+  .MenuProductos {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .MenuProductos {
+    padding: 15px;
+  }
+
+  .EncabezadoMenu {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .EncabezadoMenu h2 {
+    font-size: 22px;
+  }
+
+  .ItemProducto {
+    flex: 0 0 250px;
+    min-width: 250px;
+  }
+
+  .ControlesMenu {
+    gap: 8px;
+  }
+
+  .IrALa {
+    width: 36px;
+    height: 36px;
+  }
+
+  .FlechaIzquierda {
+    border-width: 5px 8px 5px 0;
+  }
+
+  .FlechaDerecha {
+    border-width: 5px 0 5px 8px;
+  }
+  
+  .ItemsProductos {
+    gap: 20px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ItemProducto {
+    flex: 0 0 220px;
+    min-width: 220px;
+  }
+  
+  .ImagenProductoContainer {
+    height: 160px;
+  }
+  
+  .InformacionProducto {
+    padding: 15px;
+  }
+
+  .InformacionProducto h3 {
+    font-size: 16px;
+  }
+
+  .Descripcion {
+    font-size: 13px;
+  }
+
+  .Precio {
+    font-size: 20px;
+  }
+  
+  .ItemsProductos {
+    gap: 15px;
+    padding: 10px;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .ItemsProductos,
+  .TarjetaProducto,
+  .IrALa,
+  .Cargando,
+  .ImagenProducto,
+  .Punto {
+    transition: none;
+    animation: none;
+  }
+  
+  .ItemProducto {
+    animation: none;
+  }
+}
+
+/* Modo de alto contraste */
+@media (prefers-contrast: high) {
+  .TarjetaProducto {
+    border: 2px solid #000;
+  }
+  
+  .IrALa {
+    border: 2px solid #000;
+  }
+  
+  .Punto {
+    border: 2px solid #000;
+  }
+}
+
+/* Soporte para focus-visible */
+@supports selector(:focus-visible) {
+  .IrALa:focus {
+    outline: none;
+  }
+
+  .IrALa:focus-visible {
+    outline: 3px solid #51b32b;
+    outline-offset: 2px;
+  }
+  
+  .Punto:focus {
+    outline: none;
+  }
+  
+  .Punto:focus-visible {
+    outline: 3px solid #51b32b;
+    outline-offset: 3px;
+  }
+}
+
+/* Estilo para cuando las imágenes están cargando */
+.ImagenProducto[style*="opacity: 0"] {
+  filter: blur(2px);
+}
+
+.ImagenProducto[style*="opacity: 1"] {
+  filter: none;
+}
 

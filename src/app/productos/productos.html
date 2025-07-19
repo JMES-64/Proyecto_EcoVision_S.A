@@ -1,70 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-    <body>
-        <section class="MenúProductos">
-            <div class="EncabezadoMenú">
-              <h2>Nuestros productos.</h2>
+<!-- Template para productos.component.html -->
+<section class="MenuProductos">
+  <div class="EncabezadoMenu">
+    <h2>Nuestros productos.</h2>
+    
+    <!-- Botones de navegación para productos -->
+    <div class="ControlesMenu">
+      <!-- Botón para navegar a la izquierda -->
+      <button 
+        class="IrALa Izquierda" 
+        (click)="moverIzquierda()" 
+        [disabled]="!puedeIrIzquierda" 
+        [class.disabled]="!puedeIrIzquierda" 
+        aria-label="Ir a la izquierda"
+        type="button">
+        <i class="FlechaIzquierda" aria-hidden="true"></i>
+      </button>
+      
+      <!-- Botón para navegar a la derecha -->
+      <button 
+        class="IrALa Derecha" 
+        (click)="moverDerecha()" 
+        [disabled]="!puedeIrDerecha"
+        [class.disabled]="!puedeIrDerecha" 
+        aria-label="Ir a la derecha"
+        type="button">
+        <i class="FlechaDerecha" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
 
-              <!-- Botones de navegación para productos -->
-              <div class="ControlesMenu">
-                 <button class="IrALa Izquierda" (click)="MoverIzquierda()" [disabled]="!PuedeIrIzquierda" 
-                 [class.disabled]="!PuedeIrIzquierda" aria-label="Ir a la izquierda">
-                 <i class="FlechaIzquierda" aria-hidden="true"></i>
-                 </button>
-                 <button class="IrALa Derecha" (click)="MoverDerecha()" [disabled]="!PuedeIrDerecha"
-                 [class.disabled]="!PuedeIrDerecha" aria-label="Ir a la derecha">
-                 <i class="FlechaDerecha" aria-hidden="true"></i>
-                 </button>
-              </div>
+  <!-- Contenedor de productos -->
+  <div class="ContenedorProductos" #contenedorProductos>
+    <!-- Lista de productos -->
+    <div class="ItemsProductos" #itemsProductos>
+      <!-- Iteración sobre la lista de productos -->
+      <div 
+        class="ItemProducto" 
+        *ngFor="let producto of productos; trackBy: rastrearPorProducto"
+        [attr.data-id]="producto.id">
+        
+        <!-- Tarjeta de producto -->
+        <div class="TarjetaProducto">
+          <!-- Imagen del producto -->
+          <div class="ImagenProductoContainer">
+            <img 
+              [src]="consigueImagenFuente(producto)"
+              [alt]="producto.nombre"
+              [attr.data-product-id]="producto.id"
+              class="ImagenProducto"
+              [style.opacity]="estaCargada(producto.id) ? '1' : '0'"
+              (load)="imagenCargadaExitosa($event, producto.id)"
+              (error)="imagenError($event)"
+              loading="lazy" />
+            
+            <!-- Indicador de carga -->
+            <div class="IndicadorCarga" *ngIf="!estaCargada(producto.id)">
+              <div class="Cargando" aria-label="Cargando imagen"></div>
             </div>
+          </div>
 
-            <!-- Contenedor de productos -->
-            <div class="ContenedorProductos" #ContenedorProductos>
-                <div class="ItemsProductos" #ItemsProductos>
-                    <div class="ItemProducto" *ngFor="let producto of productos; trackBy: RastrearPorProducto"
-                     [attr.data-id]="producto.id">
+          <!-- Información del producto -->
+          <div class="InformacionProducto">
+            <!-- Nombre del producto -->
+            <h3>{{ producto.nombre }}</h3>
+            <!-- Descripción del producto -->
+            <p class="Descripcion">{{ producto.descripcion }}</p>
+            <!-- Precio del producto -->
+            <div class="Precio">${{ producto.precio }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                     <!-- Tarjeta de producto -->
-                        <div class="TarjetaProducto">
-
-                            <!-- Imagen del producto -->
-                            <div class="ImagenProducto">
-                                <img src="getImagenSrc(producto)"
-                                alt="producto.nombre"
-                                class="ImagenProducto"
-                                (load)="Cargando($event)"
-                                (error)="Error($event)" />
-
-                                <!-- Indicador de carga -->
-                                <div class="IndicadorCarga" ngIf="producto.cargando(producto.id)">
-                                    <div class="Cargando" aria-label="Cargando imagen">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Información del producto -->
-                            <div class="InformacionProducto">
-                                <h3>{{producto.nombre}}</h3>
-                                <p class="Descripcion">{{producto.descripcion}}</p>
-                                <div class="Precio">
-                                    ${{producto.precio}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="IndicadorDesplazamiento">
-                    <div class="PuntosIndicadores">
-                        <span class="Punto" *ngFor="let punto of puntos; let i = index"
-                        [class.Activo]="i === PuntoIndiceActual"
-                        (click)="IrAlPunto(i)"
-                        [attr.aria-label]="'Ir a la sección ' + (i + 1)"
-                        role="button" 
-                        tabindex="0">                 
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </body>
-</html>
+  <!-- Indicadores de desplazamiento -->
+  <div class="IndicadorDesplazamiento">
+    <div class="PuntosIndicadores">
+      <button 
+        class="Punto" 
+        *ngFor="let punto of puntos; let i = index"
+        [class.Activo]="i === puntoIndiceActual"
+        (click)="irAlPunto(i)"
+        [attr.aria-label]="'Ir a la sección ' + (i + 1)"
+        type="button">
+      </button>
+    </div>
+  </div>
+</section>
