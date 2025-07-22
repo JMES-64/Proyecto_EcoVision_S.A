@@ -29,8 +29,8 @@
 }
 
 .IrALa {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border: none;
   background: #926a2e;
   color: white;
@@ -68,12 +68,12 @@
 }
 
 .FlechaIzquierda {
-  border-width: 6px 10px 6px 0;
+  border-width: 10px 20px 10px 0;
   border-color: transparent white transparent transparent;
 }
 
 .FlechaDerecha {
-  border-width: 6px 0 6px 10px;
+  border-width: 10px 0 10px 20px;
   border-color: transparent transparent transparent white;
 }
 
@@ -252,6 +252,7 @@
 }
 
 /* Diseño responsivo */
+/* Ajustes para pantallas más pequeñas */
 @media (max-width: 1024px) {
   .ItemProducto {
     flex: 0 0 260px;
@@ -263,6 +264,7 @@
   }
 }
 
+/* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
   .MenuProductos {
     padding: 15px;
@@ -306,6 +308,7 @@
   }
 }
 
+/* Ajustes para pantallas muy pequeñas */
 @media (max-width: 480px) {
   .ItemProducto {
     flex: 0 0 220px;
@@ -395,7 +398,7 @@
 .ImagenProducto[style*="opacity: 0"] {
   filter: blur(2px);
 }
-
+/* Estilo para cuando las imágenes están completamente cargadas */
 .ImagenProducto[style*="opacity: 1"] {
   filter: none;
 }
