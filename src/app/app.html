@@ -1,4 +1,3 @@
-
 <header>
     <div class="ContenedorLogo">
      <img src="Logos/EcoVisionSALogo.png" alt="Logo de EcoVision SA" class="logo">
@@ -10,15 +9,48 @@
     </div>
 </header>
 <main>
-    <section>
-<h1>Nuestros productos</h1>
-<p>Descubre nuestra amplia gama de productos diseñados para satisfacer tus necesidades.</p>
+    <section class="ContenedorBienvenida">
+<h1>Descubra nuestra amplia gama de productos diseñados para satisfacer sus necesidades.</h1>
     </section>
-    <section>
       <app-productos></app-productos>
-    </section>
-  
+
+      @defer (on viewport) {
+
+<div class="Ubicaciones">
+    <h2>Ubicaciones de nuestras tiendas</h2>
+<table>
+    <thead>
+        <tr>
+            <th aria-label="Plaza del sol">Plaza del sol</th>
+            <th>Avenida de la luna</th>
+            <th>Centro comercial de las estrellas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td><li>De la entrada a mano derecha</li></td>
+            <td><li>Calle Principal 123</li></td>
+            <td><li>2do piso</li></td>
+        </tr>
+        <tr>
+            <td><li>Sección de tiendas del hogar</li></td>
+            <td rowspan="2"><li>Contiguo a CoquisCR</li></td>
+            <td><li>Sección este</li></td>
+        </tr>
+        <tr>
+            <td><li>Contiguo a Gollo</li></td>
+            <td><li>Tienda con logo de árbol en la fachada, contiguo al AppleMart</li></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+          
+      }@placeholder {
+        <p>Estoy preparando las ubicaciones</p>
+      }
 </main>
+<br>
 <footer>
     <p>¿Desea algo más? ¡No dude en contactarnos!</p>
     <p>+888 8888 8888</p>

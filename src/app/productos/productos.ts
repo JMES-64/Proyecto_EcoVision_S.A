@@ -19,7 +19,7 @@ export interface Producto {
   templateUrl: './productos.html',
   styleUrl: './productos.css'
 })
-export class ProductosComponent implements /*OnInit,*/ AfterViewInit, OnDestroy {
+export class ProductosComponent implements OnInit,AfterViewInit, OnDestroy {
   
   // Referencias a los elementos del DOM para el contenedor y los items de productos
   @ViewChild('contenedorProductos') contenedorProductos!: ElementRef;
@@ -29,59 +29,59 @@ export class ProductosComponent implements /*OnInit,*/ AfterViewInit, OnDestroy 
   productos: Producto[] = [
     {
       id: 1,
-      nombre: 'Producto Ecológico 1',
-      precio: 100,
-      descripcion: 'Descripción del Producto Ecológico 1 con ingredientes naturales',
+      nombre: 'Envases de limpieza de plastico reciclado',
+      precio: 20,
+      descripcion: 'Envases reutilizables, hechos de plástico reciclado, ideales para productos de limpieza ecológicos.',
       imagen: 'https://www.ilser.net/wp-content/uploads/2024/12/productos-limpieza-ecologicos.jpg'
     },
     {
       id: 2,
-      nombre: 'Producto Ecológico 2',
-      precio: 200,
-      descripcion: 'Descripción del Producto Ecológico 2 con certificación orgánica',
+      nombre: 'Envases de cartón',
+      precio: 10,
+      descripcion: 'Envases hechos de cartón biodegradable, perfectos para alimentos y productos sostenibles.',
       imagen: 'https://alimonhoreca.com/wp-content/uploads/2022/06/Productos_desechables_ecologicos_biodegradables_sostenible_alimon_horeca.jpg'
     },
     {
       id: 3,
-      nombre: 'Producto Ecológico 3',
-      precio: 300,
-      descripcion: 'Descripción del Producto Ecológico 3 sostenible y natural',
+      nombre: 'Cepillos y esponjas de bambú',
+      precio: 30,
+      descripcion: 'Productos de limpieza ecológicos, fabricados con bambú sostenible, ideales para el hogar.',
       imagen: 'https://verdeaurora.com/wp-content/uploads/2023/05/beneficios-productos-ecologicos-m.png'
     },
     {
       id: 4,
-      nombre: 'Producto Ecológico 4',
-      precio: 400,
-      descripcion: 'Descripción del Producto Ecológico 4 libre de químicos',
+      nombre: 'Bolsas de tela reciclable',
+      precio: 10,
+      descripcion: 'Bolsa de tela ecológica, reutilizable y reciclable, perfecta para compras sostenibles.',
       imagen: 'https://imagenes.elpais.com/resizer/v2/EGHBH7I3OBWZYELMRCE3R467M4.jpg?auth=b38df221335d3e11a8d9bb4ec54fe3578cddafc467ddc61b611a56777ae86967&width=1960&height=1470&smart=true'
     },
     {
       id: 5,
-      nombre: 'Producto Ecológico 5',
-      precio: 500,
-      descripcion: 'Descripción del Producto Ecológico 5 biodegradable',
+      nombre: 'Cubiertos de madera biodegradable',
+      precio: 10,
+      descripcion: 'Cubiertos ecológicos de madera, biodegradables y compostables, ideales para eventos sostenibles y el día a día',
       imagen: 'https://www.greentecher.com/wp-content/uploads/2023/03/marco-productos-ecologicos-_1_.webp'
     },
     {
       id: 6,
-      nombre: 'Producto Ecológico 6',
-      precio: 600,
-      descripcion: 'Descripción del Producto Ecológico 6 con empaques reciclables',
+      nombre: 'Equipo de oficina de cartón reciclado',
+      precio: 15,
+      descripcion: 'Equipo de oficina ecológico, fabricado con cartón reciclado, ideal para un entorno de trabajo amigable con el medio ambiente.',
       imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzR6AtF9uhlwfSrn494BtPSVueqhv_vhYg9w&s'
     },
     {
       id: 7,
-      nombre: 'Producto Ecológico 7',
-      precio: 700,
-      descripcion: 'Descripción del Producto Ecológico 7 de comercio justo',
+      nombre: 'Cebillo para el baño de bambú',
+      precio: 40,
+      descripcion: 'Cepillo con ebras y mango de bambú.',
       imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2PkHqEvCP8phS3pR1_FoUZ1qAXrYquxrrg&s'
     },
     {
       id: 8,
-      nombre: 'Producto Ecológico 8',
-      precio: 800,
-      descripcion: 'Descripción del Producto Ecológico 8 con certificación verde',
-      imagen: ''
+      nombre: 'Ganchos de ropa de materiales reciclados',
+      precio: 25,
+      descripcion: 'Ganchos ecológicos para colgar ropa, hechos de materiales reciclados',
+      imagen: 'https://www.antevenio.com/wp-content/uploads/2021/02/gancho-eco.png'
     }
   ];
 
@@ -112,22 +112,14 @@ export class ProductosComponent implements /*OnInit,*/ AfterViewInit, OnDestroy 
   
   // Observador de intersección para lazy loading
   observadorIntersection!: IntersectionObserver;
-
-  /*
-  ngOnInit(): void {
-    // Actualiza los puntos indicadores según la cantidad de productos
-    this.actualizarPuntosIndicadores();
-    
-    // Para desarrollo: cargar todas las imágenes inmediatamente
-    // Comentar esta línea si quieres usar lazy loading
-    //Quita el comentario para cargar todas las imágenes al inicio
-    /*
-    this.productos.forEach(producto => {
-      this.imagenCargada.add(producto.id);
-    });
-    */
-  //}
  
+    ngOnInit(): void {
+    this.productos.forEach(producto => {// Recorre cada producto y añade su ID al conjunto de imágenes cargadas
+      this.imagenCargada.add(producto.id);// Añade el ID del producto al conjunto de imágenes cargadas
+    });
+    
+    
+  }
 
   ngAfterViewInit(): void {
     // Actualiza los botones de navegación según la posición actual
@@ -307,25 +299,10 @@ export class ProductosComponent implements /*OnInit,*/ AfterViewInit, OnDestroy 
       // Actualiza la vista de productos y los botones de navegación
       this.actualizarYTransformar();
       this.actualizarBotonesNavegacion();
-      //this.actualizarPuntoActual();
+      
     }
   }
 
-  /**
-   * Navega a la sección específica
-   */
-  /*
-  irAlPunto(puntoIndice: number): void {
-    // Asegura que el tamaño de la ventana se ha revisado antes de mover
-    this.RevisatamanoVentana();
-    // Asegura que el índice del punto es válido
-    this.indiceActual = puntoIndice * this.itemsEnVista;
-    // Actualiza la vista de productos, los botones de navegación y el punto actual
-    this.actualizarYTransformar();
-    this.actualizarBotonesNavegacion();
-    this.actualizarPuntoActual();
-  }
-*/
   /**
    * Actualiza la transformación del CSS para mostrar los productos visibles
    */
@@ -353,27 +330,4 @@ export class ProductosComponent implements /*OnInit,*/ AfterViewInit, OnDestroy 
     this.puedeIrDerecha = this.indiceActual < this.productos.length - this.itemsEnVista;
   }
 
-  /**
-   * Actualiza los puntos indicadores según la cantidad de productos
-   */
-  /*
-  private actualizarPuntosIndicadores(): void {
-    this.RevisatamanoVentana();
-    // Calcula el número total de puntos necesarios según la cantidad de productos
-    const puntosTotales = Math.ceil(this.productos.length / this.itemsEnVista);
-    // Crea un array de puntos desde 0 hasta el número total de puntos
-    this.puntos = Array.from({ length: puntosTotales }, (_, i) => i);
-  }
-*/
-  /**
-   * Actualiza el índice del punto actual según la posición de los productos
-   */
-  /*
-  private actualizarPuntoActual(): void {
-    this.RevisatamanoVentana();
-    // Asegura que el índice actual no exceda la cantidad de productos
-    // Calcula el índice del punto actual basado en el índice actual de productos
-    this.puntoIndiceActual = Math.floor(this.indiceActual / this.itemsEnVista);
-  }
-    */
 }

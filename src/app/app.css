@@ -1,4 +1,3 @@
-
 .logo{
     width: 8%;
     height: auto;
@@ -25,4 +24,36 @@
     margin-top: 2%;
     color: azure;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.ContenedorBienvenida{
+
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5%;
+}
+
+.Ubicaciones{
+  position: relative;
+  border-radius: 0px 12px 12px 0px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(7, 7, 7, 0.1);
+  background: #f8f9fa;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+table, th, td {
+    
+    border-collapse: collapse;
+    border: #b16f23cb 2px solid;
+}
+td{
+    padding: 10px;
+}
+footer {
+    background-color: #396d3c;
+    color: white;
+    text-align: center;
+    padding: 0.5%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+
 }
