@@ -1,0 +1,46 @@
+.cookies {
+    display: none;
+    background-color: white;
+    padding: 2%;
+    width: calc(100% - 40px); /* CORREGIDO: era 100px, debería ser 100% */
+    max-width: 300px;
+    line-height: 150%;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    box-shadow: 0px 2px 20px 10px rgba(222,222,222,.25);
+    text-align: center;
+}
+
+.cookies.activa {
+   display: block !important;
+}
+
+.btn{
+    width: 45%;
+    background-color: #926a2e;
+    border: none;
+    color: aliceblue;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 15px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s ease all;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    margin: 5px;
+}
+.reject{
+   float: left;
+}
+.accept{
+    float: right;
+}
+
+.btn:hover{
+    background: #51b32b;
+}

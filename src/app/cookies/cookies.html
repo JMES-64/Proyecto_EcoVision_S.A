@@ -1,0 +1,16 @@
+<section class="cookies" [class.activa]="cookiesVisible">  
+  <p class="cookies-text">
+    Este sitio utiliza cookies para mejorar la experiencia del usuario y
+    analizar el tráfico del sitio.
+  </p>
+  <div class="ContenedorBotones">
+  <button class="btn reject" aria-label="Rechazar cookies" (click)="Rechazar()"> Rechazar</button>
+  <button class="btn accept" aria-label="Aceptar cookies" (click)="Aceptar()">Aceptar</button>
+  </div>
+  <br>
+  <br>
+  <p>
+    Para más información sobre cómo utilizamos las cookies y cómo puedes
+    gestionarlas, por favor visita nuestra <a routerLink="/avisocookies" aria-label="Politica de cookies">Política de Cookies</a>.
+  </p>
+  </section>
