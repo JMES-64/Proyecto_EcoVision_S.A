@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Avisocookies } from "../avisocookies/avisocookies";
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -44,5 +43,6 @@ private verificarConsentimientoPrevio(): void {
   public Aviso() {
     this.cookiesVisible = false;
   }
+
 }
 
